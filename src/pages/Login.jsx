@@ -1,4 +1,4 @@
-import { useFileHandler, useInputValidation } from "6pp";
+import { useFileHandler, useInputValidation, useStrongPassword } from "6pp";
 import { CameraAlt as CameraAltIcon } from "@mui/icons-material";
 import {
   Avatar,
@@ -29,7 +29,7 @@ const Login = () => {
   const name = useInputValidation("");
   const bio = useInputValidation("");
   const username = useInputValidation("", usernameValidator);
-  const password = useInputValidation("");
+  const password = useStrongPassword();
 
   const avatar = useFileHandler("single");
 
@@ -331,6 +331,11 @@ Don't have an account? Sign Up
                   value={password.value}
                   onChange={password.changeHandler}
                 />
+                 { password.error && (
+                  <Typography color="error" variant="caption">
+                    {password.error}
+                  </Typography>
+                )}
 
                 <Button
                   sx={{
